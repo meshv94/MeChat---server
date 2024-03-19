@@ -44,9 +44,13 @@ io.on("connection", (Socket) => {
 
 // getting message from socket
 Socket.on('message', (data) => {
-    console.log(data)
-    if (data.room === '') io.emit('recieved-message', data.message) // send this message to all users
-    io.to(data.room).emit('recieved-message', data.message) // sends data to perticular room
+    // console.log(data)
+    if (data.room === ''){
+        io.emit('recieved-message', data) // send this message to all users
+    }else{
+        io.to(data.room).emit('recieved-message', data) // sends data to perticular room
+    }
+    
 })
 
 Socket.on('room-name', (roomName) => {
